@@ -25,12 +25,15 @@ describe "Settings transformer", ->
         parsimotion: "12345678"
 
       settings:
+        saved: true
+        synchro: prices: false, stocks: true
         priceList: "Meli"
         warehouse: "Default"
         colors: []
         sizes: []
 
     (Transformer.toDto user).should.eql
+      saved: true
       parser:
         name: "excel2003"
       columns:
@@ -41,6 +44,7 @@ describe "Settings transformer", ->
       warehouse: "Default"
       colors: []
       sizes: []
+      synchro: prices: false, stocks: true
 
   it "puede inyectar los valores del dto en el modelo", ->
     dto =

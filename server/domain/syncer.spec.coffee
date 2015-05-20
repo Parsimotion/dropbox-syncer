@@ -45,6 +45,7 @@ describe "Syncer", ->
       ]
 
     settings =
+      synchro: prices: true, stocks: true
       warehouse: "Villa Crespo"
       priceList: "Meli"
       colors: [

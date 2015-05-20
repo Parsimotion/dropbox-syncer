@@ -29,8 +29,6 @@ describe "Settings transformer", ->
         synchro: prices: false, stocks: true
         priceList: "Meli"
         warehouse: "Default"
-        colors: []
-        sizes: []
 
     (Transformer.toDto user).should.eql
       saved: true
@@ -42,8 +40,6 @@ describe "Settings transformer", ->
       parsimotionToken: "12345678"
       priceList: "Meli"
       warehouse: "Default"
-      colors: []
-      sizes: []
       synchro: prices: false, stocks: true
 
   it "puede inyectar los valores del dto en el modelo", ->

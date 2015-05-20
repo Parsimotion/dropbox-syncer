@@ -31,11 +31,18 @@ class Syncer
     unlinked: _.reject join, hasProductos
 
   _updateStocksAndPrices: (ajustesYProductos) =>
+    syncPrices = @settings.synchro.prices
+    syncStocks = @settings.synchro.stocks
+
     ajustesYProductos.linked.map (it) =>
       productos = it.productos
+
+      updateIf = (condition, update) =>
+        if condition then productos.map update else []
+
       Q.all _.flatten [
-        productos.map (p) => @_updatePrice it.ajuste, p
-        productos.map (p) => @_updateStock it.ajuste, p
+        updateIf syncPrices, (p) => @_updatePrice it.ajuste, p
+        updateIf syncStocks, (p) => @_updateStock it.ajuste, p
       ]
       .then =>
         ids: _.map productos, "id"

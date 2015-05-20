@@ -45,6 +45,7 @@ describe "Syncer", ->
       ]
 
     settings =
+      synchro: prices: true, stocks: true
       warehouse: "Villa Crespo"
       priceList: "Meli"
       colors: [
@@ -159,19 +160,31 @@ describe "Syncer", ->
           ]
         productos: [mallaEntera]
 
-    it "al ejecutar dispara una request a Parsimotion para actualizar stocks matcheando las variantes por talle y color", ->
-        syncer.execute ajustes
+    it "si en las settings digo que no quiero sincronizar precios, no lo hace", ->
+      syncer.settings.synchro = prices: false, stocks: true
+      syncer.execute ajustes
+      client.updatePrice.called.should.be.false
+      client.updateStocks.called.should.be.true
 
-        client.updateStocks.should.have.been.calledWith
-          id: 3
-          warehouse: "Villa Crespo"
-          stocks: [
-            variation: 31
-            quantity: 12
-          ,
-            variation: 32
-            quantity: 23
-          ]
+    it "si en las settings digo que no quiero sincronizar stocks, no lo hace", ->
+      syncer.settings.synchro = prices: true, stocks: false
+      syncer.execute ajustes
+      client.updatePrice.called.should.be.true
+      client.updateStocks.called.should.be.false
+
+    it "al ejecutar dispara una request a Parsimotion para actualizar stocks matcheando las variantes por talle y color", ->
+      syncer.execute ajustes
+
+      client.updateStocks.should.have.been.calledWith
+        id: 3
+        warehouse: "Villa Crespo"
+        stocks: [
+          variation: 31
+          quantity: 12
+        ,
+          variation: 32
+          quantity: 23
+        ]
 
   describe "ejecutar devuelve un objeto con el resultado de la sincronizacion:", ->
     resultadoShouldHaveProperty = null

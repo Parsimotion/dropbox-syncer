@@ -28,6 +28,8 @@ class Transformer
       _.deepSet destination, destinationPropertyPath, newValue
 
 module.exports = new Transformer [
+  from: "settings.saved", to: "saved"
+,
   from: "syncer.settings.parser", to: "parser.name"
 ,
   from: "syncer.settings.fileName", to: "fileName"
@@ -43,4 +45,6 @@ module.exports = new Transformer [
   from: "settings.colors", to: "colors"
 ,
   from: "settings.sizes", to: "sizes"
+,
+  from: "settings.synchro", to: "synchro"
 ]

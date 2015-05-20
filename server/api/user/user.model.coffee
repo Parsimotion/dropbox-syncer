@@ -45,6 +45,7 @@ UserSchema = new Schema
   ]
 
   settings:
+    saved: Boolean,
     warehouse: String
     priceList: String
     colors: [
@@ -54,7 +55,11 @@ UserSchema = new Schema
     sizes: [
       original: String
       parsimotion: String
-    ]
+    ],
+    synchro: {
+      prices: Boolean,
+      stocks: Boolean
+    }
 
 ###*
 Virtuals

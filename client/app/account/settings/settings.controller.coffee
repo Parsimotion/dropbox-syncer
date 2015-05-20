@@ -4,7 +4,8 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
   $scope.parsers = Settings.parsers()
   $scope.settings = Settings.query()
   $scope.settings.$promise.then (settings) =>
-    settings.synchro = stocks: true, prices: true
+    if not settings.saved
+      settings.synchro = stocks: true, prices: true
 
   $state.go "settings.tokens"
 
@@ -68,6 +69,7 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
     #desactiva antes de tiempo el botón de guardar
 
     if form.$valid
+      $scope.settings.saved = true
       Settings.update($scope.settings).$promise
       .then ->
         $scope.message = 'Configuración actualizada!'

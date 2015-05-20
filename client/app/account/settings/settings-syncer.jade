@@ -6,4 +6,18 @@
   label Nombre del archivo
   input.form-control(name='fileName', ng-model='settings.fileName',required='')
 
+.form-group
+  label Sincronización
+  table.synchro-settings
+    tr
+      th
+        h5.centered Stocks
+      th
+        h5.centered Precios
+    tr
+      td
+        input.form-control(type='checkbox', ng-model='settings.synchro.stocks')
+      td
+        input.form-control(type='checkbox', ng-model='settings.synchro.prices')
+
 button.btn.btn-info(ng-click='irAPasoSiguienteSyncer()') Continuar

@@ -6,6 +6,7 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
   $scope.settings.$promise.then (settings) =>
     if not settings.saved
       settings.synchro = stocks: true, prices: true
+      settings.identifier = "barcode"
 
   $state.go "settings.tokens"
 

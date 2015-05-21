@@ -43,4 +43,6 @@ module.exports = new Transformer [
   from: "settings.warehouse", to: "warehouse"
 ,
   from: "settings.synchro", to: "synchro"
+,
+  from: "settings.identifier", to: "identifier"
 ]

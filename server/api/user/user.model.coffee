@@ -48,7 +48,7 @@ UserSchema = new Schema
     saved: Boolean,
     warehouse: String,
     priceList: String,
-    method: String,
+    identifier: String,
     synchro: {
       prices: Boolean,
       stocks: Boolean

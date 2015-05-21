@@ -6,18 +6,35 @@
   label Nombre del archivo
   input.form-control(name='fileName', ng-model='settings.fileName',required='')
 
-.form-group
-  label Sincronización
-  table.synchro-settings
-    tr
-      th
-        h5.centered Precios
-      th
-        h5.centered Stocks
-    tr
-      td
-        input.form-control(type='checkbox', ng-model='settings.synchro.prices')
-      td
-        input.form-control(type='checkbox', ng-model='settings.synchro.stocks')
+table.synchro-big-settings
+  tr
+    td
+      .form-group
+        label Sincronizar
+        table.synchro-settings
+          tr
+            th
+              h5.centered Precios
+            th
+              h5.centered Stocks
+          tr
+            td
+              input.form-control(type='checkbox', ng-model='settings.synchro.prices')
+            td
+              input.form-control(type='checkbox', ng-model='settings.synchro.stocks')
+    td
+      .form-group
+        label Identificador
+        table.synchro-settings
+          tr
+            th
+              h5.centered Barcode
+            th
+              h5.centered SKU
+          tr
+            td
+              input.form-control(type='radio', ng-model='settings.identifier', value='barcode')
+            td
+              input.form-control(type='radio', ng-model='settings.identifier', value='sku')
 
 button.btn.btn-info(ng-click='irAPasoSiguienteSyncer()') Continuar

@@ -53,10 +53,13 @@ class Syncer
       id: producto.id
       warehouse: @settings.warehouse
       stocks: _.map ajuste.stocks, (it) =>
-        variation: (@_getVariante producto, it).id
+        variationId = (@_getVariante producto, it).id
+        console.log "Updating stock of (#{producto.id}, #{variationId}) with quantity #{it.stock}..."
+        variation: variationId
         quantity: it.stock
 
   _updatePrice: (ajuste, producto) =>
+    console.log "Updating price of #{producto.id} with value $#{ajuste.precio}..."
     @productecaApi.updatePrice producto, @settings.priceList, ajuste.precio
 
   _getStock: (producto) =>

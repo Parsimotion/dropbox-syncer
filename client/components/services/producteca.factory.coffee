@@ -26,15 +26,3 @@ app.factory "Producteca", ($resource) ->
           transformRequest: setAuthorizationHeader
           transformResponse: toNames
           isArray: true
-
-        colors:
-          method: "GET"
-          url: "#{endpoint}/colors"
-          transformRequest: setAuthorizationHeader
-          isArray: true
-
-        sizes:
-          method: "GET"
-          url: "#{endpoint}/products/clothingsizes"
-          transformRequest: setAuthorizationHeader
-          isArray: true

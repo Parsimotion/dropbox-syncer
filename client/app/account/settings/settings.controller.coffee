@@ -9,20 +9,6 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
 
   $state.go "settings.tokens"
 
-  observeAndUpdateSizesAndColors = (watchExpression) ->
-    observeOnScope $scope, watchExpression, _.isEqual
-    .filter ({newValue}) -> newValue?
-    .subscribe ->
-      getUnique = (field) ->
-        column = $scope.settings.columns[field]
-        _($scope.datosExcel).map(column).uniq().value()
-
-      $scope.userColors = getUnique "color"
-      $scope.userSizes = _.filter (getUnique "talle"), isNaN
-
-  observeAndUpdateSizesAndColors "settings.columns"
-  observeAndUpdateSizesAndColors "datosExcel"
-
   Producteca.then (Producteca) =>
     observeOnScope $scope, "settings.parsimotionToken"
     .filter ({newValue}) -> newValue?
@@ -31,8 +17,6 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
       $scope.user = producteca.user()
       $scope.priceLists = producteca.priceLists()
       $scope.warehouses = producteca.warehouses()
-      $scope.colors = producteca.colors()
-      $scope.sizes = producteca.sizes()
 
   $scope.irAPasoSiguienteSyncer = ->
     nextState =
@@ -44,20 +28,14 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
     $state.go "settings.#{nextState}"
 
   $scope.irAPasoSiguienteExcel = ->
-    nextState =
-      if $scope.settings.columns.color? && $scope.settings.columns.talle?
-        "colores"
-      else
-        "producteca"
-
-    $state.go "settings.#{nextState}"
+    $state.go "settings.producteca"
 
   $scope.parseExcel = (xls) ->
     firstSheet = (workbook) -> workbook.Sheets[workbook.SheetNames[0]]
     toWorkbook = (xlsBinary) -> XLS.read xlsBinary, type: "binary"
     parse = _.compose XLS.utils.sheet_to_json, firstSheet, toWorkbook
 
-    $scope.columnasExcelRequeridas = ["sku", "nombre", "precio", "stock", "talle", "color"]
+    $scope.columnasExcelRequeridas = ["sku", "nombre", "precio", "stock"]
     $scope.datosExcel = parse xls
     $scope.ejemploFilasExcel = _.take $scope.datosExcel, 5
     $scope.primeraFilaExcel = _.head $scope.ejemploFilasExcel

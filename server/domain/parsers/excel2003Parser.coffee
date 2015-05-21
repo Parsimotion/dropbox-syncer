@@ -19,7 +19,7 @@ class Excel2003Parser
     workbook.Sheets[workbook.SheetNames[0]]
 
   _toDto: (row) =>
-    columns = ["sku", "nombre", "precio", "stock", "talle", "color"]
+    columns = ["sku", "nombre", "precio", "stock"]
     values = _.map columns, (col) => row[@columnsMapping[col]]
 
     _.zipObject columns, values

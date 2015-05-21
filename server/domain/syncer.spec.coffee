@@ -95,13 +95,13 @@ describe "Syncer", ->
 
     it "si en las settings digo que no quiero sincronizar precios, no lo hace", ->
       syncer.settings.synchro = prices: false, stocks: true
-      syncer.execute ajustes
+      syncer.execute [ajuste]
       client.updatePrice.called.should.be.false
       client.updateStocks.called.should.be.true
 
     it "si en las settings digo que no quiero sincronizar stocks, no lo hace", ->
       syncer.settings.synchro = prices: true, stocks: false
-      syncer.execute ajustes
+      syncer.execute [ajuste]
       client.updatePrice.called.should.be.true
       client.updateStocks.called.should.be.false
 

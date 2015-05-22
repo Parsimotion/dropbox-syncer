@@ -68,13 +68,15 @@ class Syncer
     if stock? then stock.quantity else 0
 
   _getVariante: (producto, ajuste) =>
-    producto.getVarianteParaAjuste ajuste
+    producto.getVarianteParaAjuste(ajuste) || producto.firstVariante()
 
   _getProductosForAjuste: (ajuste) =>
     findBySku = => _.filter @productos, sku: ajuste.sku
+    return findBySku() if @settings.identifier is "sku"
 
-    if @settings.identifier is "barcode"
-      _(@productos)
-        .filter (it) => it.getVarianteParaAjuste(ajuste)?
-        .value() || findBySku()
-    else findBySku()
+    matches = _(@productos)
+      .filter (it) => it.getVarianteParaAjuste(ajuste)?
+      .value()
+
+    if _.isEmpty matches then findBySku()
+    else matches

@@ -11,3 +11,6 @@ class Producto
 
   getVarianteParaAjuste: (ajuste) =>
     _.find @variations, (it) => it.barcode is ajuste.sku
+
+  firstVariante: =>
+    _.head @variations

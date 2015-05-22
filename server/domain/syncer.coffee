@@ -17,12 +17,11 @@ class Syncer
     join = _(ajustes)
     .filter "sku"
     .groupBy "sku"
-    .map (variantes, sku) =>
-      ajuste:
-        sku: sku
-        precio: (_.head variantes).precio
-        stocks: variantes
-      productos: @_getProductosForAjuste (_.head variantes)
+    .map (ajustes) =>
+      ajuste = _.head ajustes
+
+      ajuste: ajuste
+      productos: @_getProductosForAjuste ajuste
     .value()
 
     hasProductos = (it) => not _.isEmpty it.productos
@@ -48,23 +47,36 @@ class Syncer
         ids: _.map productos, "id"
         sku: it.ajuste.sku
 
+  _updatePrice: (ajuste, producto) =>
+    console.log "Updating price of ~#{ajuste.sku}(#{producto.id}) with value $#{ajuste.precio}..."
+    @productecaApi.updatePrice producto, @settings.priceList, ajuste.precio
+
   _updateStock: (ajuste, producto) =>
+    variationId = @_getVariante(producto, ajuste).id
+
+    console.log "Updating stock of ~#{ajuste.sku}(#{producto.id}, #{variationId}) with quantity #{ajuste.stock}..."
     @productecaApi.updateStocks
       id: producto.id
       warehouse: @settings.warehouse
-      stocks: _.map ajuste.stocks, (it) =>
-        variation: (@_getVariante producto, it).id
-        quantity: it.stock
-
-  _updatePrice: (ajuste, producto) =>
-    @productecaApi.updatePrice producto, @settings.priceList, ajuste.precio
+      stocks: [
+        variation: variationId
+        quantity: ajuste.stock
+      ]
 
   _getStock: (producto) =>
     stock = _.find (@_getVariante producto).stocks, warehouse: @settings.warehouse
     if stock? then stock.quantity else 0
 
   _getVariante: (producto, ajuste) =>
-    producto.getVarianteParaAjuste ajuste, @settings
+    producto.getVarianteParaAjuste(ajuste) || producto.firstVariante()
 
   _getProductosForAjuste: (ajuste) =>
-    _.filter @productos, sku: ajuste.sku
+    findBySku = => _.filter @productos, sku: ajuste.sku
+    return findBySku() if @settings.identifier is "sku"
+
+    matches = _(@productos)
+      .filter (it) => it.getVarianteParaAjuste(ajuste)?
+      .value()
+
+    if _.isEmpty matches then findBySku()
+    else matches

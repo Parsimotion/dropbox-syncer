@@ -1,6 +1,6 @@
 div(ng-show="columnasExcel == null")
   .form-group
-    label Seleccione su archivo Excel con los stocks
+    label Seleccione su archivo Excel con los precios/stocks
     input.form-control(type="file", ng-file-select="", on-read-file="parseExcel($fileContent)")
 
 div(ng-show="columnasExcel != null")

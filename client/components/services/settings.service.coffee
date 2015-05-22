@@ -11,12 +11,7 @@ app.factory "Settings", ($resource) ->
     query:
       isArray: false
       transformResponse: (data) ->
-        settings = JSON.parse data
-
-        arrayToObject settings, "colors"
-        arrayToObject settings, "sizes"
-
-        settings
+        JSON.parse data
 
     parsers:
       method: "GET"
@@ -26,7 +21,4 @@ app.factory "Settings", ($resource) ->
     update:
       method: "PUT"
       transformRequest: (settings) ->
-        objectToArray settings, "colors"
-        objectToArray settings, "sizes"
-
         JSON.stringify settings

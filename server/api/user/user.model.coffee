@@ -46,16 +46,9 @@ UserSchema = new Schema
 
   settings:
     saved: Boolean,
-    warehouse: String
-    priceList: String
-    colors: [
-      original: String
-      parsimotion: String
-    ]
-    sizes: [
-      original: String
-      parsimotion: String
-    ],
+    warehouse: String,
+    priceList: String,
+    identifier: String,
     synchro: {
       prices: Boolean,
       stocks: Boolean

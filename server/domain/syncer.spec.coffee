@@ -12,17 +12,18 @@ chai.use require("sinon-chai")
 describe "Syncer", ->
   client = null
   syncer = null
-  product1 = null
-  mallaEntera = null
+  campera = null
+  camperaVariable = null
 
   beforeEach ->
     client =
       updateStocks: sinon.stub().returns Q()
       updatePrice: sinon.stub().returns Q()
 
-    product1 = new Producto
+    campera = new Producto
       id: 1
       sku: "123456"
+      description: "Campera De Cuero Para Romper La Noche"
       variations: [
         id: 2
         stocks: [
@@ -31,42 +32,35 @@ describe "Syncer", ->
         ]
       ]
 
-    mallaEntera = new Producto
-      id: 3
-      sku: "654321"
+    camperaVariable = new Producto
+      id: 1
+      sku: "123456"
+      description: "Campera De Cuero Para Romper La Noche En Muchos Colores"
       variations: [
-        id: 31
-        primaryColor: "Rojo"
-        size: "M"
+        id: 2
+        barcode: "CamperaRompeNocheNegra"
+        stocks: [
+          warehouse: "Villa Crespo"
+          quantity: 12
+        ]
       ,
-        id: 32
-        primaryColor: "Rojo"
-        size: "L"
+        id: 4
+        barcode: "CamperaRompeNocheBlanca"
+        stocks: [
+          warehouse: "Villa Crespo"
+          quantity: 16
+        ]
       ]
 
     settings =
+      identifier: "sku"
       synchro: prices: true, stocks: true
       warehouse: "Villa Crespo"
       priceList: "Meli"
-      colors: [
-        original: "Rojo pasion"
-        parsimotion: "Rojo"
-      ,
-        original: "Azul especial"
-        parsimotion: "Azul"
-      ]
-      sizes: [
-        original: "Mediano"
-        parsimotion: "M"
-      ,
-        original: "Largo"
-        parsimotion: "L"
-      ]
 
     syncer = new Syncer client, settings, [
-      product1,
-      mallaEntera,
-
+      campera,
+      camperaVariable,
       new Producto
         id: 2
         sku: ""
@@ -86,7 +80,7 @@ describe "Syncer", ->
 
     client.updateStocks.called.should.be.false
 
-  describe "cuando los ajustes no tienen variantes", ->
+  describe "cuando los productos no tienen variantes...", ->
     ajuste =
       sku: "123456"
       precio: 25
@@ -99,12 +93,8 @@ describe "Syncer", ->
           ajuste:
             sku: "123456"
             precio: 25
-            stocks: [
-              sku: "123456"
-              stock: 40
-              precio: 25
-            ]
-          productos: [product1]
+            stock: 40
+          productos: [campera, camperaVariable]
 
     describe "al ejecutar dispara una request a Parsimotion matcheando el id segun sku", ->
       beforeEach ->
@@ -120,71 +110,19 @@ describe "Syncer", ->
           ]
 
       it "para actualizar el precio", ->
-        client.updatePrice.should.have.been.calledWith product1, "Meli", 25
-
-  describe "cuando los ajustes tienen variantes", ->
-    ajustes = null
-
-    beforeEach ->
-      ajustes = [
-        sku: "654321"
-        precio: 25
-        stock: 12
-        color: "Rojo pasion"
-        talle: "Mediano"
-      ,
-        sku: "654321"
-        precio: 25
-        stock: 23
-        color: "Rojo pasion"
-        talle: "Largo"
-      ]
-
-    it "joinAjustesYProductos tiene en cuenta los colores y talles", ->
-      (syncer.joinAjustesYProductos ajustes).linked[0].should.eql
-        ajuste:
-          sku: "654321"
-          precio: 25
-          stocks: [
-            sku: "654321"
-            precio: 25
-            color: "Rojo pasion"
-            talle: "Mediano"
-            stock: 12
-          ,
-            sku: "654321"
-            precio: 25
-            color: "Rojo pasion"
-            talle: "Largo"
-            stock: 23
-          ]
-        productos: [mallaEntera]
+        client.updatePrice.should.have.been.calledWith campera, "Meli", 25
 
     it "si en las settings digo que no quiero sincronizar precios, no lo hace", ->
       syncer.settings.synchro = prices: false, stocks: true
-      syncer.execute ajustes
+      syncer.execute [ajuste]
       client.updatePrice.called.should.be.false
       client.updateStocks.called.should.be.true
 
     it "si en las settings digo que no quiero sincronizar stocks, no lo hace", ->
       syncer.settings.synchro = prices: true, stocks: false
-      syncer.execute ajustes
+      syncer.execute [ajuste]
       client.updatePrice.called.should.be.true
       client.updateStocks.called.should.be.false
-
-    it "al ejecutar dispara una request a Parsimotion para actualizar stocks matcheando las variantes por talle y color", ->
-      syncer.execute ajustes
-
-      client.updateStocks.should.have.been.calledWith
-        id: 3
-        warehouse: "Villa Crespo"
-        stocks: [
-          variation: 31
-          quantity: 12
-        ,
-          variation: 32
-          quantity: 23
-        ]
 
   describe "ejecutar devuelve un objeto con el resultado de la sincronizacion:", ->
     resultadoShouldHaveProperty = null
@@ -204,3 +142,38 @@ describe "Syncer", ->
 
     it "los linked", ->
       resultadoShouldHaveProperty "linked", [ sku: "123456" ]
+
+  describe "cuando los productos sí tienen variantes...", ->
+    it "cuando sincronizo por sku: no sincroniza las variantes", ->
+      ajustes = [
+        sku: "CamperaRompeNocheNegra", precio: 11, stock: 23
+      ,
+        sku: "CamperaRompeNocheBlanca", precio: 12, stock: 24
+      ,
+        sku: "123456"
+      ]
+
+      syncer.execute(ajustes).then (result) =>
+        result.should.eql
+          linked: [ sku: "123456" ]
+          unlinked: [
+            { sku: "CamperaRompeNocheNegra" }, { sku: "CamperaRompeNocheBlanca" }
+          ]
+
+    it "cuando sincronizo por barcode: usa el barcode y sku cuando no puede", ->
+      syncer.settings.identifier = "barcode"
+
+      ajustes = [
+        { sku: "CamperaRompeNocheNegra", precio: 11, stock: 23 }
+        { sku: "CamperaRompeNocheBlanca", precio: 12, stock: 24 }
+        { sku: "123456" }
+      ]
+
+      syncer.execute(ajustes).then (result) =>
+        result.should.eql
+          linked: [
+            { sku: "123456" }
+            { sku: "CamperaRompeNocheNegra" }
+            { sku: "CamperaRompeNocheBlanca" }
+          ]
+          unlinked: []

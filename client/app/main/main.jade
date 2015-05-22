@@ -24,15 +24,16 @@ div(ng-include='"components/navbar/navbar.html"')
     table(class="table table-striped")
       thead
         tr
-          th SKU
+          th(ng-show="settings.identifier == 'sku'") SKU
+          th(ng-show="settings.identifier == 'barcode'") Barcode
           th Nombre
-          th Stock
-          th Precio
+          th(ng-show="settings.synchro.prices") Precio
+          th(ng-show="settings.synchro.stocks") Stock
           th Vinculado
       tbody
         tr(ng-repeat="item in ajustes.ajustes | orderBy: 'estadoSincronizacion'", ng-class="{success: item.estadoSincronizacion == 'ok', danger: item.estadoSincronizacion == 'error'}")
           td {{item.sku}}
           td {{item.nombre}}
-          td {{item.stock}}
-          td {{item.precio | currency}}
+          td(ng-show="settings.synchro.prices") {{item.precio | currency}}
+          td(ng-show="settings.synchro.stocks") {{item.stock}}
           td {{item.estadoSincronizacion | checkmark}}

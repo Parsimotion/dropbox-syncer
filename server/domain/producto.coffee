@@ -9,6 +9,5 @@ class Producto
   hasVariantes: =>
     _.size @variations > 1
 
-  getVarianteParaAjuste: (ajuste, settings) =>
-    #todo: modificar para bancar varias variantes (cuak)
-    _.head @variations
+  getVarianteParaAjuste: (ajuste) =>
+    _.find @variations, (it) => it.barcode is ajuste.sku

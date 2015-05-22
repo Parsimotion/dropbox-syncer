@@ -1,10 +1,9 @@
 Q = require("q")
 
 respond = (res, promise) ->
-  promise.then ((data) -> res.send 200, data), (error) -> console.error error ; res.send 500, error
+  promise.then ((data) -> res.send 200, data), (error) -> throw error
 
-exports.stocks = (req, res) ->
-  #todo: rename de la ruta /api/stocks a /api/ajustes
+exports.adjustments = (req, res) ->
   respond res, req.user.getDataSource().getAjustes()
 
 exports.sync = (req, res) ->

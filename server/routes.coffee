@@ -8,7 +8,7 @@ module.exports = (app) ->
   # Insert routes below
   app.use "/api/files", require("./api/file")
   app.use "/api/users", require("./api/user")
-  app.use "/api/stocks", require("./api/stock")
+  app.use "/api/adjustments", require("./api/adjustments")
   app.use "/api/hooks/dropbox", require("./api/hooks/dropbox")
   app.use "/api/hooks/webjob", require("./api/hooks/webjob")
   app.use "/api/settings", require("./api/settings")

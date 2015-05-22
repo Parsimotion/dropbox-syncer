@@ -25,6 +25,7 @@ describe "Settings transformer", ->
         parsimotion: "12345678"
 
       settings:
+        identifier: "sku"
         saved: true
         synchro: prices: false, stocks: true
         priceList: "Meli"
@@ -32,6 +33,7 @@ describe "Settings transformer", ->
 
     (Transformer.toDto user).should.eql
       saved: true
+      identifier: "sku"
       parser:
         name: "excel2003"
       columns:

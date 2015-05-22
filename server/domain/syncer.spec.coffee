@@ -70,11 +70,7 @@ describe "Syncer", ->
           ajuste:
             sku: "123456"
             precio: 25
-            stocks: [
-              sku: "123456"
-              stock: 40
-              precio: 25
-            ]
+            stock: 40
           productos: [campera]
 
     describe "al ejecutar dispara una request a Parsimotion matcheando el id segun sku", ->

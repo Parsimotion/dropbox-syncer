@@ -17,7 +17,7 @@ class Syncer
     join = _(ajustes)
     .filter "sku"
     .groupBy "sku"
-    .map (ajustes, identifier) =>
+    .map (ajustes) =>
       ajuste = _.head ajustes
 
       ajuste: ajuste

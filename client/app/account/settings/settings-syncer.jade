@@ -37,4 +37,7 @@ table.synchro-big-settings
             td
               input.form-control(type='radio', ng-model='settings.identifier', value='sku')
 
+div.alert.alert-warning(ng-show="settings.identifier == 'sku'")
+  | Si utiliza SKU como identificador, no podrá sincronizar productos con variantes.
+
 button.btn.btn-info(ng-click='irAPasoSiguienteSyncer()') Continuar

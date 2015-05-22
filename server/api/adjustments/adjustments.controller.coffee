@@ -1,7 +1,7 @@
 Q = require("q")
 
 respond = (res, promise) ->
-  promise.then ((data) -> res.send 200, data), (error) -> throw error
+  promise.then ((data) -> res.send 200, data), (error) -> console.error error ; res.send 500, error
 
 exports.adjustments = (req, res) ->
   respond res, req.user.getDataSource().getAjustes()

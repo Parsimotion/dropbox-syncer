@@ -14,6 +14,8 @@ describe 'MainCtrl', ->
         sku: 2
       ]
 
+    $httpBackend.expectGET("/api/settings").respond 200
+
     $httpBackend.flush()
 
   it 'al sincronizar, actualiza el estado de cada ajuste', ->

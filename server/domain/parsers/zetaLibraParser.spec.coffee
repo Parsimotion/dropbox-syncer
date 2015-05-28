@@ -19,6 +19,6 @@ describe "ZetaLibra Parser", ->
       ]
 
     parser.getAjustes(data).should.eql [
-      { sku: "RVERDES", precio: 900, stock: 8 }
-      { sku: "UYR", precio: 0.25925, stock: 299998140 }
+      { identifier: "RVERDES", price: 900, stock: 8 }
+      { identifier: "UYR", price: 0.25925, stock: 299998140 }
     ]

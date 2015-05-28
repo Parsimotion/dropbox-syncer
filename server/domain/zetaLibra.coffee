@@ -1,6 +1,6 @@
 DataSource = require "./dataSource"
 SoapRequest = require "./webservices/soapRequest"
-Promise = require "bluebird"
+Promise = require("bluebird")
 _ = require("lodash")
 
 module.exports =

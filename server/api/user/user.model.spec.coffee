@@ -55,7 +55,7 @@ describe "User Model", ->
     user.authenticate("blah").should.not.be.true
 
   it "should retrieve the data source class from its syncer property", ->
-    Dropbox = require("../../domain/syncers/dropbox")
+    Dropbox = require("../../domain/dropbox")
     user.getDataSourceConstructor().should.be.equal Dropbox
 
   it "should persistir correctamente los linked en el historial", (done) ->

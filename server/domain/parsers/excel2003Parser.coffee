@@ -1,6 +1,6 @@
 _ = require "lodash"
 XLS = require "xlsjs"
-AjusteStock = require "../ajusteStock"
+Adjustment = require("producteca-sdk").Sync.Adjustment
 
 module.exports =
 
@@ -10,7 +10,7 @@ class Excel2003Parser
 
   getAjustes: (data) ->
     workbook = XLS.read data, type: "binary"
-    _.map (@_getDataFrom workbook), (row) => new AjusteStock (@_toDto row)
+    _.map (@_getDataFrom workbook), (row) => new Adjustment (@_toDto row)
 
   _getDataFrom: (workbook) ->
     XLS.utils.sheet_to_json (@_getFirstSheet workbook)
@@ -22,4 +22,4 @@ class Excel2003Parser
     columns = ["sku", "nombre", "precio", "stock"]
     values = _.map columns, (col) => row[@columnsMapping[col]]
 
-    _.zipObject columns, values
+    _.zipObject ["identifier", "name", "price", "stock"], values

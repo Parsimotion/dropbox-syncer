@@ -1,5 +1,5 @@
 _ = require("lodash")
-AjusteStock = require("../ajusteStock")
+Adjustment = require("producteca-sdk").Sync.Adjustment
 
 module.exports =
 
@@ -32,7 +32,7 @@ class ZetaLibraParser
   _combine: (pair) =>
     it = _.assign _.first(pair), _.last(pair)
 
-    new AjusteStock
-      sku: it.CodigoArticulo
+    new Adjustment
+      identifier: it.CodigoArticulo
+      price: it.PrecioConIVA
       stock: it.Stock
-      precio: it.PrecioConIVA

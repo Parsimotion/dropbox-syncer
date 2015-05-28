@@ -14,12 +14,12 @@ describe "Fixed length parser", ->
     ajuste = parser.getAjustes(data)[0]
 
     ajuste.should.eql
-      sku: "924065117102"
-      nombre: "ALR 111 50W 12V 24G"
-      precio: 124.49
+      identifier: "924065117102"
+      name: "ALR 111 50W 12V 24G"
+      price: 124.49
       stock: 14
 
-    ajuste.precio.should.be.a.Number
+    ajuste.price.should.be.a.Number
     ajuste.stock.should.be.a.Number
 
   it "omite lineas vacias", ->
@@ -29,8 +29,8 @@ describe "Fixed length parser", ->
 
 """
 
-    parser.getAjustes(data)[0].sku.should.equal "924065117102"
+    parser.getAjustes(data)[0].identifier.should.equal "924065117102"
 
   it "funciona con el newline de Windows", ->
     data = "924065117102                  ALR 111 50W 12V 24G                                        124.49     14.00\r\n"
-    parser.getAjustes(data)[0].sku.should.equal "924065117102"
+    parser.getAjustes(data)[0].identifier.should.equal "924065117102"

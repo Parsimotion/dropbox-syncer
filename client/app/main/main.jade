@@ -32,8 +32,8 @@ div(ng-include='"components/navbar/navbar.html"')
           th Vinculado
       tbody
         tr(ng-repeat="item in ajustes.ajustes | orderBy: 'estadoSincronizacion'", ng-class="{success: item.estadoSincronizacion == 'ok', danger: item.estadoSincronizacion == 'error'}")
-          td {{item.sku}}
-          td {{item.nombre}}
-          td(ng-show="settings.synchro.prices") {{item.precio | currency}}
+          td {{item.identifier}}
+          td {{item.name}}
+          td(ng-show="settings.synchro.prices") {{item.price | currency}}
           td(ng-show="settings.synchro.stocks") {{item.stock}}
           td {{item.estadoSincronizacion | checkmark}}

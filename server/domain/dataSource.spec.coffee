@@ -1,6 +1,6 @@
 DataSource = require("./dataSource")
-FixedLengthParser = require("../parsers/fixedLengthParser")
-Excel2003Parser = require("../parsers/excel2003Parser.coffee")
+FixedLengthParser = require("./parsers/fixedLengthParser")
+Excel2003Parser = require("./parsers/excel2003Parser.coffee")
 require("producteca-sdk").Api::initializeClient = =>
 
 describe "DataSource", ->

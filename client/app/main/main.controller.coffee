@@ -3,7 +3,7 @@
 app.controller 'MainCtrl', ($scope, $http, Stock, Settings, Auth) ->
   actualizarEstado = (ajustes, estado) ->
     ajustes.forEach (ajuste) ->
-      _.find($scope.ajustes.ajustes, sku: ajuste.sku).estadoSincronizacion = estado
+      _.find($scope.ajustes.ajustes, identifier: ajuste.identifier).estadoSincronizacion = estado
 
   $scope.ajustes = Stock.query()
   $scope.settings = Settings.query()

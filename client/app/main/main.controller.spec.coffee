@@ -9,9 +9,9 @@ describe 'MainCtrl', ->
     $httpBackend.expectGET("/api/adjustments").respond 200,
       fecha: 461523123
       ajustes: [
-        sku: 1
+        identifier: 1
       ,
-        sku: 2
+        identifier: 2
       ]
 
     $httpBackend.expectGET("/api/settings").respond 200
@@ -20,15 +20,15 @@ describe 'MainCtrl', ->
 
   it 'al sincronizar, actualiza el estado de cada ajuste', ->
     $httpBackend.expectPOST("/api/adjustments").respond 200,
-      linked: [ sku: 1 ]
-      unlinked: [ sku: 2 ]
+      linked: [ identifier: 1 ]
+      unlinked: [ identifier: 2 ]
 
     $scope.sincronizar()
 
     $httpBackend.flush()
 
     expect($scope.ajustes.ajustes).toDeepEqual [
-      sku: 1, estadoSincronizacion: "ok"
+      identifier: 1, estadoSincronizacion: "ok"
     ,
-      sku: 2, estadoSincronizacion: "error"
+      identifier: 2, estadoSincronizacion: "error"
     ]

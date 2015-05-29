@@ -20,5 +20,3 @@ app.factory "Settings", ($resource) ->
 
     update:
       method: "PUT"
-      transformRequest: (settings) ->
-        JSON.stringify settings

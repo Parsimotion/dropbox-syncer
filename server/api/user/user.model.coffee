@@ -27,6 +27,15 @@ UserSchema = new Schema
     dropbox: String
     parsimotion: String
 
+  settings:
+    saved: Boolean
+    warehouse: String
+    priceList: String
+    identifier: String
+    synchro:
+      prices: Boolean
+      stocks: Boolean
+
   syncer:
     name:
       type: String
@@ -43,16 +52,6 @@ UserSchema = new Schema
     linked: Number
     unlinked: Number
   ]
-
-  settings:
-    saved: Boolean,
-    warehouse: String,
-    priceList: String,
-    identifier: String,
-    synchro: {
-      prices: Boolean,
-      stocks: Boolean
-    }
 
 ###*
 Virtuals

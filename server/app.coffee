@@ -1,9 +1,7 @@
+"use strict"
 ###*
 Main application file
 ###
-"use strict"
-
-require 'coffee-script/register'
 
 # Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV or "development"
@@ -15,7 +13,7 @@ config = require("./config/environment")
 mongoose.connect config.mongo.uri, config.mongo.options
 
 # Populate DB with sample data
-require "./config/seed"  if config.seedDB
+require "./config/seed" if config.seedDB
 
 # Setup server
 app = express()

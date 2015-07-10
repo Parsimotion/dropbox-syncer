@@ -1,5 +1,5 @@
-_ = require "lodash"
-XLS = require "xlsjs"
+_ = require("lodash")
+XLS = require("xlsjs")
 Adjustment = require("producteca-sdk").Sync.Adjustment
 
 module.exports =

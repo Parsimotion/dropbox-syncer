@@ -1,5 +1,3 @@
-Q = require("q")
-
 respond = (res, promise) ->
   promise.then ((data) -> res.send 200, data), (error) -> console.error error ; res.send 500, error
 

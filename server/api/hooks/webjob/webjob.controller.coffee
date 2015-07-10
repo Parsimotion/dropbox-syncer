@@ -1,4 +1,4 @@
-User = require("../../user/user.model")
+User = include("api/user/user.model")
 
 exports.notification = (req, res) ->
   if not isSignatureValid req
@@ -9,7 +9,7 @@ exports.notification = (req, res) ->
       console.log "Synchronizing from Job..."
       user.getDataSource().sync()
         .then (result) => res.send 200, result
-    .catch => res.send 400, "There was a problem in the sync"
+    .catch (e) => res.send 400, e.message or e
 
 isSignatureValid = (req) ->
-  req.headers["signature"] is process.env.WEBJOB_SIGNATURE
+  req.headers["signature"] is (process.env.WEBJOB_SIGNATURE or "default")

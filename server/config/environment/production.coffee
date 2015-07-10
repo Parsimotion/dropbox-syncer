@@ -12,7 +12,7 @@ module.exports =
 
   # MongoDB connection options
   mongo:
-    uri: process.env.MONGOLAB_URI or process.env.MONGOHQ_URL or process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME or "mongodb://localhost/parsimotionsyncer"
+    uri: process.env.MONGO_URI or process.env.MONGOHQ_URL or "mongodb://localhost/parsimotionsyncer"
     options:
       server:
         socketOptions:

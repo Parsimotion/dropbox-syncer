@@ -6,25 +6,12 @@ exports.setup = (User, config) ->
     clientID: config.dropbox.clientID
     clientSecret: config.dropbox.clientSecret
     callbackURL: config.dropbox.callbackURL
-  , (accessToken, refreshToken, profile, done) ->
-    User.findOne { provider: "dropbox", providerId: profile.id }, (err, user) ->
-      return done err if err
+    passReqToCallback: true
+  , (req, accessToken, refreshToken, profile, done) ->
+    User.findOne { _id: req.user._id }, (err, user) ->
+      return done "the user is not logged in" if err
 
       setTokenAndSave = =>
         user.tokens.dropbox = accessToken
         user.save() ; user
-      return done null, setTokenAndSave() if user?
-
-      user = new User
-        name: profile.displayName
-        email: profile.emails[0].value
-        role: "user"
-        username: profile.username
-        provider: "dropbox"
-        providerId: profile.id
-        tokens:
-          dropbox: accessToken
-
-      user.save (err) ->
-        done err if err
-        done null, user
+      return done null, setTokenAndSave()

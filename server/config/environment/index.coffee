@@ -23,27 +23,29 @@ all =
   secrets:
     session: process.env.SESSION_SECRET or "parsimotion-syncer-secret"
 
-
-  # List of user roles
-  userRoles: [
-    "guest"
-    "user"
-    "admin"
-  ]
-
   # MongoDB connection options
   mongo:
     options:
       db:
         safe: true
 
+  producteca:
+    uri: process.env.PRODUCTECA_API or "http://api.producteca.com"
+    clientID: process.env.PRODUCTECA_CLIENTID or "id"
+    clientSecret: process.env.PRODUCTECA_CLIENTSECRET or "secret"
+    callbackURL: (process.env.DOMAIN or "") + "/auth/producteca/callback"
+
   dropbox:
     clientID: process.env.DROPBOX_ID or "id"
     clientSecret: process.env.DROPBOX_SECRET or "secret"
     callbackURL: (process.env.DOMAIN or "") + "/auth/dropbox/callback"
 
-  parsimotion:
-    uri: process.env.PARSIMOTION_URI or "http://api.producteca.com"
+authServerUrl = process.env.AUTHORIZATION_SERVER_URL
+if authServerUrl?
+  _.assign all.producteca,
+    authorizationURL: "#{authServerUrl}/oauth/authorise"
+    tokenURL: "#{authServerUrl}/oauth/token"
+    profileUrl: "#{authServerUrl}/users/me"
 
 # Export the config object based on the NODE_ENV
 # ==============================================

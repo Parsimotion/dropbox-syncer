@@ -7,9 +7,9 @@ router = express.Router()
 
 router
 
-.get "/", passport.authenticate("dropbox-oauth2")
+.get "/", passport.authenticate("producteca")
 
-.get "/callback", passport.authenticate("dropbox-oauth2",
+.get "/callback", passport.authenticate("producteca",
   successRedirect: "/",
   failureRedirect: "/"
 )

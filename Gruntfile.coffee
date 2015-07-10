@@ -1,10 +1,18 @@
 "use strict"
 
+require("coffee-script/register")
+#[^] last version of coffee
+
 module.exports = (grunt) ->
   try
     localConfig = require("./server/config/local.env")
   catch e
     localConfig = {}
+
+
+  azureWebsite = "dropbox-syncer" + if process.env.BRANCH_NAME is "master" then "" else "-#{process.env.BRANCH_NAME}"
+  azureGit = "#{azureWebsite}.scm.azurewebsites.net:443/dropbox-syncer.git"
+  remote = "https://#{process.env.AZURE_GIT_CREDENTIALS}@#{azureGit}"
 
   # Load grunt tasks automatically, when needed
   require("jit-grunt") grunt,
@@ -27,11 +35,12 @@ module.exports = (grunt) ->
     yeoman:
     # configurable paths
       client: require("./bower.json").appPath or "client"
+      server: "server"
       dist: "dist"
 
     express:
       options:
-        port: process.env.PORT or 9000
+        port: process.env.PORT or 9001
         #opts: ['node_modules/.bin/coffee']
         #uncomment if the "script" property needs to be compiled with coffee
         #                    |
@@ -231,7 +240,7 @@ module.exports = (grunt) ->
   # Automatically inject Bower components into the app
     wiredep:
       target:
-        src: "<%= yeoman.client %>/index.html"
+        src: "<%= yeoman.client %>/main.html"
         ignorePath: "<%= yeoman.client %>/"
         exclude: [
           /bootstrap-sass-official/
@@ -258,7 +267,8 @@ module.exports = (grunt) ->
   # concat, minify and revision files. Creates configurations in memory so
   # additional tasks can operate on them
     useminPrepare:
-      html: ["<%= yeoman.client %>/index.html"]
+      htmls:
+        src: ["<%= yeoman.client %>/*.html"]
       options:
         dest: "<%= yeoman.dist %>/public"
 
@@ -316,7 +326,7 @@ module.exports = (grunt) ->
     ngtemplates:
       options:
       # This should be the name of your apps angular module
-        module: "parsimotionSyncerApp"
+        module: "dropbox-syncer-app"
         htmlmin:
           collapseBooleanAttributes: true
           collapseWhitespace: true
@@ -354,12 +364,11 @@ module.exports = (grunt) ->
           cwd: "<%= yeoman.client %>"
           dest: "<%= yeoman.dist %>/public"
           src: [
-            "*.{ico,png,txt}"
+            "*.{ico,png,txt,html}"
             ".htaccess"
             "bower_components/**/*"
             "assets/images/{,*/}*.{webp}"
             "assets/fonts/**/*"
-            "index.html"
           ]
         ,
           expand: true
@@ -373,6 +382,11 @@ module.exports = (grunt) ->
             "package.json"
             "server/**/*"
           ]
+        ,
+          expand: true
+          cwd: ".tmp"
+          src: ["{app,components}/**/landing.css"]
+          dest: "<%= yeoman.dist %>/public"
         ]
 
       styles:
@@ -449,7 +463,7 @@ module.exports = (grunt) ->
       options:
         reporter: "spec"
 
-      src: ["server/**/*.spec.coffee"]
+      src: ["server/srv-globals.js", "server/**/*.spec.coffee"]
 
     protractor:
       options:
@@ -518,11 +532,12 @@ module.exports = (grunt) ->
 
         files:
           ".tmp/app/app.css": "<%= yeoman.client %>/app/app.scss"
+          ".tmp/app/landing.css": "<%= yeoman.client %>/app/base.scss"
 
     injector:
       options: {}
 
-    # Inject application script files into index.html (doesn't include bower)
+    # Inject application script files into main.html (doesn't include bower)
       scripts:
         options:
           transform: (filePath) ->
@@ -534,7 +549,7 @@ module.exports = (grunt) ->
           endtag: "<!-- endinjector -->"
 
         files:
-          "<%= yeoman.client %>/index.html": [
+          "<%= yeoman.client %>/main.html": [
             [
               "{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js"
               "!{.tmp,<%= yeoman.client %>}/app/app.js"
@@ -557,12 +572,12 @@ module.exports = (grunt) ->
 
         files:
           "<%= yeoman.client %>/app/app.scss": [
-            "<%= yeoman.client %>/{app,components}/**/*.{scss,sass}"
+            "<%= yeoman.client %>/{app,components}/**/!(_)*.{scss,sass}"
             "!<%= yeoman.client %>/app/app.{scss,sass}"
           ]
 
 
-    # Inject component css into index.html
+    # Inject component css into main.html
       css:
         options:
           transform: (filePath) ->
@@ -574,7 +589,7 @@ module.exports = (grunt) ->
           endtag: "<!-- endinjector -->"
 
         files:
-          "<%= yeoman.client %>/index.html": ["<%= yeoman.client %>/{app,components}/**/*.css"]
+          "<%= yeoman.client %>/main.html": ["<%= yeoman.client %>/{app,components}/**/*.css"]
   }
 
   # Used for delaying livereload until after server has restarted

@@ -1,6 +1,5 @@
+# dropbox-syncer
 [![Build Status](https://semaphoreapp.com/api/v1/projects/e62f9730-4565-44ee-9d7e-cc26c228f8fe/240763/badge.png)](https://semaphoreapp.com/faloi/syncer)
-
-# Parsimotion Syncer
 
 ## Setup
 
@@ -23,14 +22,13 @@ Crear `/server/config/local.env.coffee` con:
 module.exports =
  DOMAIN: "http://localhost:9000"
  SESSION_SECRET: "***"
- DROPBOX_ID: "***"
- DROPBOX_SECRET: "***"
+ VARIABLE: "***"
 
  # Control debug level for modules using visionmedia/debug
  DEBUG: ""
 ```
 
-Los valores de estos atributos son secreto de estado, pero pueden obtenerse desde la sección de variables de entorno de Heroku.
+Los valores de estos atributos son secretos, por eso este archivo se encuentra ignorado en el versionado.
 
 ## Servidor
 

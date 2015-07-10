@@ -10,7 +10,7 @@ app.factory "Producteca", ($resource) ->
       $resource endpoint, {},
         user:
           method: "GET"
-          url: "#{endpoint}/user/me"
+          url: "#{endpoint}/users/me"
           transformRequest: setAuthorizationHeader
 
         priceLists:

@@ -28,3 +28,24 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+.code {
+  border: 1px solid #999999;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.margin-centered {
+  margin-left: auto;
+}
+
+$btnText:                           #fff;
+$btnTextAlt:                        #000;
+
+$btnFacebookBackground:             #3B5998;
+$btnFacebookBackgroundHighlight:    #133783;
+$btnGithubBackground:               #fafafa;
+$btnGithubBackgroundHighlight:      #ccc;
+
+.btn-dropbox {
+  @include button-variant($btnText, #428bca, #2d6d97);
+}

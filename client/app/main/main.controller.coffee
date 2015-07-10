@@ -1,13 +1,15 @@
 'use strict'
 
-app.controller 'MainCtrl', ($scope, $http, Stock, Settings, Auth) ->
+app.controller 'MainCtrl', ($scope, $http, $window, Adjustment, Settings, Auth) ->
   actualizarEstado = (ajustes, estado) ->
     ajustes.forEach (ajuste) ->
       _.find($scope.ajustes.ajustes, identifier: ajuste.identifier).estadoSincronizacion = estado
 
-  $scope.ajustes = Stock.query()
+  $scope.ajustes = Adjustment.query()
   $scope.settings = Settings.query()
-  Auth.getCurrentUser().$promise.then (user) ->
+  $scope.getCurrentUser = Auth.getCurrentUser
+
+  $scope.getCurrentUser().$promise.then (user) ->
     $scope.lastSync = user.lastSync
 
   $scope.sincronizar = ->
@@ -19,3 +21,6 @@ app.controller 'MainCtrl', ($scope, $http, Stock, Settings, Auth) ->
 
       actualizarEstado resultadoSincronizacion.linked, "ok"
       actualizarEstado resultadoSincronizacion.unlinked, "error"
+
+  $scope.loginOauth = (provider) ->
+    $window.location.href = '/auth/' + provider

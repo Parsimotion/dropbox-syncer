@@ -1,39 +1,57 @@
 div(ng-include='"components/navbar/navbar.html"')
 
+
 .container
-  .row(ng-show="lastSync")
-    h3
-      | Última sincronización&nbsp
-      small {{ lastSync.date | date:'medium' }}
+  div(ng-show="!getCurrentUser().tokens.dropbox")
+    div.large-info.alert.alert-warning
+      | Para configurar la sincronización debes vincular tu cuenta con Dropbox.
 
-    .col-md-4
-      ul.list-group
-        li.list-group-item
-          span.badge.alert-success {{ lastSync.linked.length }}
-          | Vinculados
+    .row.margin-centered
+      form.form(name='form', ng-submit='login(form)', novalidate='')
+      div
+        a.btn.btn-dropbox(href='', ng-click='loginOauth("dropbox")')
+          i.fa.fa-dropbox
+          |  Vincular con Dropbox
+        = ' '
 
-        li.list-group-item
-          span.badge.alert-warning {{ lastSync.unlinked.length }}
-          | No vinculados
-  .row
-    h3
-      | Articulos para sincronizar&nbsp
-      small {{ ajustes.fecha | date:'medium' }}
-      button(class="btn btn-link", ng-click="sincronizar()", ng-disabled="isSincronizando") Sincronizar ahora
+  div(ng-show="getCurrentUser().tokens.dropbox && !settings.saved")
+    div.large-info.alert.alert-success
+      | Ya puedes configurar clickeando en el icono de arriba a la derecha.
 
-    table(class="table table-striped")
-      thead
-        tr
-          th(ng-show="settings.identifier == 'sku'") SKU
-          th(ng-show="settings.identifier == 'barcode'") Barcode
-          th Nombre
-          th(ng-show="settings.synchro.prices") Precio
-          th(ng-show="settings.synchro.stocks") Stock
-          th Vinculado
-      tbody
-        tr(ng-repeat="item in ajustes.ajustes | orderBy: 'estadoSincronizacion'", ng-class="{success: item.estadoSincronizacion == 'ok', danger: item.estadoSincronizacion == 'error'}")
-          td {{item.identifier}}
-          td {{item.name}}
-          td(ng-show="settings.synchro.prices") {{item.price | currency}}
-          td(ng-show="settings.synchro.stocks") {{item.stock}}
-          td {{item.estadoSincronizacion | checkmark}}
+  div(ng-show="settings.saved")
+    .row(ng-show="lastSync")
+      h3
+        | Última sincronización&nbsp
+        small {{ lastSync.date | date:'medium' }}
+
+      .col-md-4
+        ul.list-group
+          li.list-group-item
+            span.badge.alert-success {{ lastSync.linked.length }}
+            | Vinculados
+
+          li.list-group-item
+            span.badge.alert-warning {{ lastSync.unlinked.length }}
+            | No vinculados
+    .row
+      h3
+        | Articulos para sincronizar&nbsp
+        small {{ ajustes.fecha | date:'medium' }}
+        button(class="btn btn-link", ng-click="sincronizar()", ng-disabled="isSincronizando") Sincronizar ahora
+
+      table(class="table table-striped")
+        thead
+          tr
+            th(ng-show="settings.identifier == 'sku'") SKU
+            th(ng-show="settings.identifier == 'barcode'") Barcode
+            th Nombre
+            th(ng-show="settings.synchro.prices") Precio
+            th(ng-show="settings.synchro.stocks") Stock
+            th Vinculado
+        tbody
+          tr(ng-repeat="item in ajustes.ajustes | orderBy: 'estadoSincronizacion'", ng-class="{success: item.estadoSincronizacion == 'ok', danger: item.estadoSincronizacion == 'error'}")
+            td {{item.identifier}}
+            td {{item.name}}
+            td(ng-show="settings.synchro.prices") {{item.price | currency}}
+            td(ng-show="settings.synchro.stocks") {{item.stock}}
+            td {{item.estadoSincronizacion | checkmark}}

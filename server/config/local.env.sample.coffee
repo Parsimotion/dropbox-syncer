@@ -16,7 +16,6 @@ module.exports =
   WEBJOB_SIGNATURE: "a signature for webjobs"
   PRODUCTECA_CLIENTID: ""
   PRODUCTECA_CLIENTSECRET: ""
-  COOKIE_KEY: "ashdvgfuyquodrhdgusirewj8oaesrtgef7rswje"
 
   # Control debug level for modules using visionmedia/debug
   DEBUG: ""

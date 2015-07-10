@@ -1,6 +1,9 @@
 _ = require("lodash")
 _.mixin require("lodash-deep")
 
+###
+This is a transformer between the model and the DTO that the settings will use
+###
 class Transformer
   constructor: (@mappings) ->
 
@@ -36,7 +39,7 @@ module.exports = new Transformer [
 ,
   from: "syncer.settings.columns", to: "columns"
 ,
-  from: "tokens.parsimotion", to: "parsimotionToken"
+  from: "tokens.producteca", to: "productecaToken"
 ,
   from: "settings.priceList", to: "priceList"
 ,

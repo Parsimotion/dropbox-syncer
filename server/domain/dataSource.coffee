@@ -3,15 +3,15 @@ _ = require("lodash")
 ProductecaApi = require("producteca-sdk").Api
 Syncer = require("producteca-sdk").Sync.Syncer
 Parsers = require("./parsers/parsers")
-config = require("../config/environment")
+config = include("config/environment")
 
 module.exports =
 
 class DataSource
   constructor: (@user, @settings) ->
     @productecaApi = new ProductecaApi
-      accessToken: @user.tokens.parsimotion
-      url: config.parsimotion.uri
+      accessToken: @user.tokens.producteca
+      url: config.producteca.uri
 
   getAjustes: => throw new Error "not implemented"
 

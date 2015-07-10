@@ -3,7 +3,7 @@ $scope = null
 getController = null
 
 beforeEach ->
-  module "parsimotionSyncerApp"
+  module "dropbox-syncer-app"
 
   inject ($controller, $rootScope, _$httpBackend_, observeOnScope) ->
     $httpBackend = _$httpBackend_

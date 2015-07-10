@@ -1,15 +1,16 @@
 "use strict"
+
 express = require("express")
-passport = require("passport")
-config = require("../config/environment")
-User = require("../api/user/user.model")
+config = include("config/environment")
+User = include("api/user/user.model")
 
 # Passport Configuration
-require("./local/passport").setup User, config
+require("./passport.serializer")
+require("./producteca/passport").setup User, config
 require("./dropbox/passport").setup User, config
 
 router = express.Router()
-router.use "/local", require("./local")
+router.use "/producteca", require("./producteca")
 router.use "/dropbox", require("./dropbox")
 
 module.exports = router

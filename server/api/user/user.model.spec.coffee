@@ -1,13 +1,10 @@
 should = require("chai").should()
-app = require("../../app")
+app = include("app")
 User = require("./user.model")
 user = new User(
-  provider: "local"
+  provider: "producteca"
   name: "Fake User"
   email: "test@test.com"
-  password: "password"
-  syncer:
-    name: "dropbox"
 )
 
 describe "User Model", ->
@@ -21,11 +18,12 @@ describe "User Model", ->
 
   it "should store the provider and its id", (done) ->
     new User(
-      provider: 'dropbox'
+      email: 'juan@gmail.com'
+      provider: 'producteca'
       providerId: 12345678
     ).save ->
       User.find {}, (err, users) ->
-        users[0].should.have.property "provider", "dropbox"
+        users[0].should.have.property "provider", "producteca"
         users[0].should.have.property "providerId", 12345678
 
         done()
@@ -48,14 +46,8 @@ describe "User Model", ->
       should.exist err
       done()
 
-  it "should authenticate user if password is valid", ->
-    user.authenticate("password").should.be.true
-
-  it "should not authenticate user if password is invalid", ->
-    user.authenticate("blah").should.not.be.true
-
   it "should retrieve the data source class from its syncer property", ->
-    Dropbox = require("../../domain/dropbox")
+    Dropbox = include("domain/dropbox")
     user.getDataSourceConstructor().should.be.equal Dropbox
 
   it "should persistir correctamente los linked en el historial", (done) ->

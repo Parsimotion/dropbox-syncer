@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'parsimotionSyncerApp'
+angular.module 'dropbox-syncer-app'
 .config ($stateProvider) ->
   $stateProvider
   .state 'history',

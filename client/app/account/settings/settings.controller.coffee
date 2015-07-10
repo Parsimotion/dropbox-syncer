@@ -8,14 +8,13 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
       settings.synchro = stocks: true, prices: true
       settings.identifier = "barcode"
 
-  $state.go "settings.tokens"
+  $state.go "settings.syncer"
 
   Producteca.then (Producteca) =>
-    observeOnScope $scope, "settings.parsimotionToken"
+    observeOnScope $scope, "settings.productecaToken"
     .filter ({newValue}) -> newValue?
     .map ({newValue}) -> new Producteca newValue
     .subscribe (producteca) ->
-      $scope.user = producteca.user()
       $scope.priceLists = producteca.priceLists()
       $scope.warehouses = producteca.warehouses()
 

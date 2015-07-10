@@ -1,17 +1,10 @@
 app.factory "Settings", ($resource) ->
-  arrayToObject = (settings, property) ->
-    settings[property] = _.reduce settings[property], ((acum, {original, parsimotion}) -> acum[original] = parsimotion; acum), {}
-
-  objectToArray = (settings, property) ->
-    settings[property] = _.map settings[property], (value, key) ->
-      original: key
-      parsimotion: value
-
   $resource "/api/settings", {},
     query:
       isArray: false
       transformResponse: (data) ->
-        JSON.parse data
+        settings = JSON.parse data
+        settings
 
     parsers:
       method: "GET"
@@ -20,3 +13,5 @@ app.factory "Settings", ($resource) ->
 
     update:
       method: "PUT"
+      transformRequest: (settings) ->
+        JSON.stringify settings

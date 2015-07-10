@@ -49,20 +49,3 @@ describe "User Model", ->
   it "should retrieve the data source class from its syncer property", ->
     Dropbox = include("domain/dropbox")
     user.getDataSourceConstructor().should.be.equal Dropbox
-
-  it "should persistir correctamente los linked en el historial", (done) ->
-    new User(
-      provider: 'dropbox'
-      providerId: 12345678
-      lastSync:
-        linked: [ sku: "12345" ]
-    ).save ->
-      User.find {}, (err, users) ->
-        userShouldHaveProperties = (properties) ->
-          for name, value of properties
-            users[0].lastSync.linked[0].should.have.property name, value
-
-        userShouldHaveProperties
-          sku: "12345"
-
-        done()

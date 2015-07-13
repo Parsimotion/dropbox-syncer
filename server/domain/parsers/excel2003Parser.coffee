@@ -9,7 +9,10 @@ class Excel2003Parser
     @columnsMapping = settings?.columns
 
   getAjustes: (data) ->
-    workbook = XLS.read data, type: "binary"
+    try
+      workbook = XLS.read data, type: "binary"
+    catch e
+      throw new Error("Error reading the excel")
     _.map (@_getDataFrom workbook), (row) => new Adjustment (@_toDto row)
 
   _getDataFrom: (workbook) ->

@@ -25,7 +25,7 @@ class DropboxXls2Orders
   getOrders: =>
     @dropboxClient
       .readFileAsync @settings.fileName, binary: true
-      .then (data) => @_getParser().getOrders data
+      .then (data) => @_getParser().getOrders data[0]
 
   # Ajustes dummy para mantener la interfaz
   getAjustes: =>

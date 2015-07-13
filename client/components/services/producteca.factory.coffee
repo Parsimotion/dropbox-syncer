@@ -12,6 +12,7 @@ app.factory "Producteca", ($resource) ->
           method: "GET"
           url: "#{endpoint}/users/me"
           transformRequest: setAuthorizationHeader
+<<<<<<< HEAD
 
         priceLists:
           method: "GET"
@@ -26,3 +27,5 @@ app.factory "Producteca", ($resource) ->
           transformRequest: setAuthorizationHeader
           transformResponse: toNames
           isArray: true
+=======
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b

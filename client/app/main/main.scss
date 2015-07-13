@@ -30,6 +30,7 @@
 }
 
 .code {
+<<<<<<< HEAD
   border: 1px solid #999999;
   font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
@@ -48,4 +49,8 @@ $btnGithubBackgroundHighlight:      #ccc;
 
 .btn-dropbox {
   @include button-variant($btnText, #428bca, #2d6d97);
+=======
+  border:1px solid #999999;
+  font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 }

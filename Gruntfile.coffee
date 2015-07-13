@@ -10,8 +10,13 @@ module.exports = (grunt) ->
     localConfig = {}
 
 
+<<<<<<< HEAD
   azureWebsite = "dropbox-syncer" + if process.env.BRANCH_NAME is "master" then "" else "-#{process.env.BRANCH_NAME}"
   azureGit = "#{azureWebsite}.scm.azurewebsites.net:443/dropbox-syncer.git"
+=======
+  azureWebsite = "integration-seed" + if process.env.BRANCH_NAME is "master" then "" else "-#{process.env.BRANCH_NAME}"
+  azureGit = "#{azureWebsite}.scm.azurewebsites.net:443/integration-seed.git"
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   remote = "https://#{process.env.AZURE_GIT_CREDENTIALS}@#{azureGit}"
 
   # Load grunt tasks automatically, when needed
@@ -326,7 +331,11 @@ module.exports = (grunt) ->
     ngtemplates:
       options:
       # This should be the name of your apps angular module
+<<<<<<< HEAD
         module: "dropbox-syncer-app"
+=======
+        module: "integration-seed-app"
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
         htmlmin:
           collapseBooleanAttributes: true
           collapseWhitespace: true
@@ -403,6 +412,7 @@ module.exports = (grunt) ->
         connectCommits: false
         message: "Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%"
 
+<<<<<<< HEAD
       heroku:
         options:
           remote: "git@heroku.com:parsimotion-syncer.git"
@@ -424,6 +434,13 @@ module.exports = (grunt) ->
           branch: "master"
 
 
+=======
+      azure:
+        options:
+          remote: remote
+          branch: "master"
+
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   # Run some tasks in parallel to speed up the build process
     concurrent:
       server: [

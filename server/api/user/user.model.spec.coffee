@@ -45,7 +45,10 @@ describe "User Model", ->
     user.save (err) ->
       should.exist err
       done()
+<<<<<<< HEAD
 
   it "should retrieve the data source class from its syncer property", ->
     Dropbox = include("domain/dropbox")
     user.getDataSourceConstructor().should.be.equal Dropbox
+=======
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b

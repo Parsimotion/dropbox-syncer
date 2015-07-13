@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "dropbox-syncer",
+=======
+  "name": "integration-seed",
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   "version": "0.0.0",
   "dependencies": {
     "angular": "1.3.0",
@@ -14,9 +18,13 @@
     "angular-bootstrap": "0.11.0",
     "font-awesome": "~4.1.0",
     "lodash": "~2.4.1",
+<<<<<<< HEAD
     "angular-ui-router": "~0.2.15",
     "js-xls": "~0.7.2",
     "angular-rx": "Parsimotion/rx.angular.js#828097b96e85226655e2de245fd8b5e5791d119f"
+=======
+    "angular-ui-router": "~0.2.15"
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   },
   "devDependencies": {
     "angular-mocks": "1.3.0",

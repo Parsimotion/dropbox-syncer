@@ -21,7 +21,11 @@ all =
 
   # Secret for session, you will want to change this and make it an environment variable
   secrets:
+<<<<<<< HEAD
     session: process.env.SESSION_SECRET or "parsimotion-syncer-secret"
+=======
+    session: process.env.SESSION_SECRET or "integration-seed-secret"
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 
   # MongoDB connection options
   mongo:
@@ -35,11 +39,14 @@ all =
     clientSecret: process.env.PRODUCTECA_CLIENTSECRET or "secret"
     callbackURL: (process.env.DOMAIN or "") + "/auth/producteca/callback"
 
+<<<<<<< HEAD
   dropbox:
     clientID: process.env.DROPBOX_ID or "id"
     clientSecret: process.env.DROPBOX_SECRET or "secret"
     callbackURL: (process.env.DOMAIN or "") + "/auth/dropbox/callback"
 
+=======
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 authServerUrl = process.env.AUTHORIZATION_SERVER_URL
 if authServerUrl?
   _.assign all.producteca,

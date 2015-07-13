@@ -21,6 +21,7 @@ UserSchema = new Schema
 
   tokens:
     producteca: String
+<<<<<<< HEAD
     dropbox: String
 
   settings:
@@ -55,5 +56,10 @@ Methods
 UserSchema.methods =
   getDataSource: -> S = @getDataSourceConstructor() ; new S @, @syncer.settings
   getDataSourceConstructor: -> include("domain/#{@syncer.name}")
+=======
+
+  settings:
+    saved: Boolean
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 
 module.exports = mongoose.model("User", UserSchema)

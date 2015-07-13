@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "dropbox-syncer",
+=======
+  "name": "integration-seed",
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   "version": "0.0.0",
   "main": "server/app.js",
   "dependencies": {
@@ -12,7 +16,10 @@
     "cookie-parser": "~1.0.1",
     "cookie-session": "^1.0.2",
     "datejs": "^1.0.0-rc1",
+<<<<<<< HEAD
     "dropbox": "^0.10.3",
+=======
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
     "errorhandler": "~1.0.0",
     "express": "~4.0.0",
     "express-jwt": "^0.1.3",
@@ -25,6 +32,7 @@
     "morgan": "~1.0.0",
     "oauth": "~0.9.12",
     "passport": "~0.2.0",
+<<<<<<< HEAD
     "passport-dropbox-oauth2": "^0.1.6",
     "passport-producteca": "^0.0.6",
     "producteca-sdk": "0.0.18",
@@ -32,6 +40,12 @@
     "serve-favicon": "~2.0.1",
     "soap": "^0.9.1",
     "xlsjs": "^0.7.5"
+=======
+    "passport-producteca": "^0.0.6",
+    "producteca-sdk": "0.0.18",
+    "request": "^2.58.0",
+    "serve-favicon": "~2.0.1"
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   },
   "devDependencies": {
     "chai": "^1.9.1",
@@ -91,8 +105,12 @@
     "sinon": "^1.10.3",
     "sinon-chai": "^2.5.0",
     "supertest": "~0.11.0",
+<<<<<<< HEAD
     "time-grunt": "~0.3.1",
     "timekeeper": "0.0.5"
+=======
+    "time-grunt": "~0.3.1"
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   },
   "engines": {
     "node": ">=0.10.0"

@@ -6,7 +6,11 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         span.icon-bar
         span.icon-bar
         span.icon-bar
+<<<<<<< HEAD
       a.navbar-brand(href='/') dropbox-syncer
+=======
+      a.navbar-brand(href='/') integration-seed
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 
     div#navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
       ul.nav.navbar-nav
@@ -17,7 +21,11 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li
           p.navbar-text Hola {{ getCurrentUser().name }}
 
+<<<<<<< HEAD
         li(ng-show="getCurrentUser().tokens.dropbox", ng-class='{active: isActive("/settings")}')
+=======
+        li(ng-class='{active: isActive("/settings")}')
+>>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
           a(href='/settings')
             span.glyphicon.glyphicon-cog
 

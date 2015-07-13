@@ -1,6 +1,5 @@
 'use strict'
 
-<<<<<<< HEAD
 app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Producteca) ->
   $scope.parsers = Settings.parsers()
   $scope.settings = Settings.query()
@@ -46,19 +45,6 @@ app.controller 'SettingsCtrl', ($scope, $state, observeOnScope, Settings, Produc
     #$scope.submitted = true #saco esto porque
     #hay una condición de carrera en localhost que
     #desactiva antes de tiempo el botón de guardar
-=======
-app.controller 'SettingsCtrl', ($scope, $state, Settings, Producteca) ->
-  $scope.settings = Settings.query()
-
-  $state.go "settings.step1"
-  $scope.settings.$promise.then (settings) =>
-    if not settings.saved
-      ;
-      # set to settings some default values
-
-  $scope.save = (form) ->
-    $scope.submitted = true
->>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 
     if form.$valid
       $scope.settings.saved = true

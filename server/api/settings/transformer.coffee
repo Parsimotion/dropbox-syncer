@@ -33,7 +33,6 @@ class Transformer
 module.exports = new Transformer [
   from: "settings.saved", to: "saved"
 ,
-<<<<<<< HEAD
   from: "syncer.settings.parser", to: "parser.name"
 ,
   from: "syncer.settings.fileName", to: "fileName"
@@ -49,9 +48,4 @@ module.exports = new Transformer [
   from: "settings.synchro", to: "synchro"
 ,
   from: "settings.identifier", to: "identifier"
-=======
-  from: "example.property", to: "exampleProperty"
-,
-  from: "another.property", to: "another"
->>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 ]

@@ -1,6 +1,5 @@
 'use strict'
 
-<<<<<<< HEAD
 app.controller 'MainCtrl', ($scope, $http, $window, Adjustment, Settings, Auth) ->
   actualizarEstado = (ajustes, estado) ->
     ajustes.forEach (ajuste) ->
@@ -25,8 +24,3 @@ app.controller 'MainCtrl', ($scope, $http, $window, Adjustment, Settings, Auth) 
 
   $scope.loginOauth = (provider) ->
     $window.location.href = '/auth/' + provider
-=======
-app.controller 'MainCtrl', ($scope, $http, Auth) ->
-  Auth.getCurrentUser().$promise?.then (user) ->
-    #do something here
->>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b

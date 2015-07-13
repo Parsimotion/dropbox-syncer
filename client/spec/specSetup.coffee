@@ -3,11 +3,7 @@ $scope = null
 getController = null
 
 beforeEach ->
-<<<<<<< HEAD
   module "dropbox-syncer-app"
-=======
-  module "integration-seed-app"
->>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 
   inject ($controller, $rootScope, _$httpBackend_, observeOnScope) ->
     $httpBackend = _$httpBackend_

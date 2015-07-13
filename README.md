@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 # dropbox-syncer
 [![Build Status](https://semaphoreapp.com/api/v1/projects/e62f9730-4565-44ee-9d7e-cc26c228f8fe/240763/badge.png)](https://semaphoreapp.com/faloi/syncer)
-=======
-# integration-seed
-Please, replace the string "integration-seed" with the name you want, in all the project.
->>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
 
 ## Setup
 

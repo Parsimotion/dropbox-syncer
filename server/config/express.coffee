@@ -32,11 +32,7 @@ module.exports = (app) ->
   app.use bodyParser.json()
   app.use methodOverride()
   app.use cookieParser()
-<<<<<<< HEAD
   app.use cookieSession(keys: [process.env.COOKIE_KEY or "dropbox-syncer-cookie-key"])
-=======
-  app.use cookieSession(keys: [process.env.COOKIE_KEY or "integration-seed-cookie-key"])
->>>>>>> c6fd6501923fe3458eb4d26c2f43af59c6ca090b
   app.use passport.initialize()
   app.use passport.session()
 

@@ -18,6 +18,7 @@ UserSchema = new Schema
 
   provider: String
   providerId: Number
+  dropboxId: Number
 
   tokens:
     producteca: String

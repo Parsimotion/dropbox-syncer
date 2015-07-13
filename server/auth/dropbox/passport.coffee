@@ -12,6 +12,7 @@ exports.setup = (User, config) ->
       return done "the user is not logged in" if err
 
       setTokenAndSave = =>
+        user.dropboxId = profile.id
         user.tokens.dropbox = accessToken
         user.save() ; user
       return done null, setTokenAndSave()

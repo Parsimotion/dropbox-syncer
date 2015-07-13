@@ -12,7 +12,7 @@ exports.notification = (req, res) ->
     return res.send 403, "Invalid signature"
 
   res.send 200
-  User.findAsync({ provider: "dropbox", providerId: { $in: req.body.delta.users } })
+  User.findAsync({ dropboxId: { $in: req.body.delta.users } })
     .then (users) ->
       console.log "Synchronizing from Dropbox..."
       users.forEach (it) -> it.getDataSource().sync()

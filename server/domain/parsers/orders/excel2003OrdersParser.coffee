@@ -8,7 +8,7 @@ class Excel2003OrdersParser
   constructor: (settings) ->
     @columnsMapping = settings?.columns
 
-  getAjustes: (data) ->
+  getOrders: (data) ->
     workbook = XLS.read data, type: "binary"
     _.map (@_getDataFrom workbook), (row) => new Adjustment (@_toDto row)
 

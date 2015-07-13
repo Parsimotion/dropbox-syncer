@@ -5,9 +5,7 @@ _ = require("lodash")
 
 module.exports =
 
-###
-Esta integración debería ser un site aparte y no debería estar ni a gancho en el dropbox-syncer
-###
+# Esta integración debería ser un site aparte y no debería estar ni a gancho en el dropbox-syncer
 class ZetaLibra extends DataSource
   constructor: (user, settings) ->
     super user, settings

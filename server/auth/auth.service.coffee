@@ -7,7 +7,8 @@ exports.authenticated = (req, res, next) ->
   reject = -> res.send 401
 
   if req.isAuthenticated()
-    User.findOneAsync(req.user._id)
+    # find the last version of the user in the db
+    User.findOneAsync(_id: req.user._id)
       .then (user) -> req.user = user ; next()
       .catch reject
   else reject()

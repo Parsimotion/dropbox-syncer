@@ -22,7 +22,8 @@ class DataSource
           new Syncer(@productecaApi, @user.settings, productos)
             .execute resultado.ajustes
       .then (lastSync) =>
-        @user.lastSync = date: Date.now()
+        lastSync.date = Date.now()
+        @user.lastSync = _.pick lastSync, "date"
         @user.history.push _.mapValues lastSync, (items) =>
           if _.isArray items then items.length
           else items

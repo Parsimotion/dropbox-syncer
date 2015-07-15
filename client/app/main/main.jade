@@ -27,11 +27,11 @@ div(ng-include='"components/navbar/navbar.html"')
       .col-md-4
         ul.list-group
           li.list-group-item
-            span.badge.alert-success {{ lastSync.linked }}
+            span.badge.alert-success {{ lastSync.linked.length }}
             | Vinculados
 
           li.list-group-item
-            span.badge.alert-warning {{ lastSync.unlinked }}
+            span.badge.alert-warning {{ lastSync.unlinked.length }}
             | No vinculados
     .row
       h3

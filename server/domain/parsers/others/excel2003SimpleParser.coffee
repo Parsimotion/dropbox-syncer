@@ -10,7 +10,11 @@ class Excel2003OrdersParser
     catch e
       throw new Error("Error reading the excel")
 
-    @_getDataFrom workbook
+    @_getDataFrom(workbook).map (row) =>
+      _.mapValues row, (value) =>
+        if value is "TRUE" then true
+        else if value is "FALSE" then false
+        else value
 
   _getDataFrom: (workbook) ->
     XLS.utils.sheet_to_json (@_getFirstSheet workbook)

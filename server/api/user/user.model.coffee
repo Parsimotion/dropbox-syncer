@@ -41,8 +41,6 @@ UserSchema = new Schema
 
   lastSync:
     date: Date
-    linked: [Schema.Types.Mixed]
-    unlinked: [sku: String]
 
   history: [
     date: Date

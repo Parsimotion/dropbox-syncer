@@ -10,7 +10,7 @@ app.controller 'MainCtrl', ($scope, $http, $window, Adjustment, Settings, Auth) 
   $scope.getCurrentUser = Auth.getCurrentUser
 
   $scope.getCurrentUser().$promise.then (user) ->
-    $scope.lastSync = user.lastSync
+    $scope.lastSync = _(user.history).sortBy("date").last()
 
   $scope.sincronizar = ->
     $scope.isSincronizando = true

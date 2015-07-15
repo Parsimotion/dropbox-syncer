@@ -1,5 +1,6 @@
 # dropbox-syncer
-[![Build Status](https://semaphoreapp.com/api/v1/projects/e62f9730-4565-44ee-9d7e-cc26c228f8fe/240763/badge.png)](https://semaphoreapp.com/faloi/syncer)
+[![Build 
+Status](https://semaphoreci.com/api/v1/projects/2e23c247-6e78-4544-8cff-4a9e7ff56ed4/484350/badge.svg)](https://semaphoreci.com/andreskir/dropbox-syncer)
 
 ## Setup
 

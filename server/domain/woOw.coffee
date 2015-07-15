@@ -24,12 +24,12 @@ class WoOw
           linked = results
             .filter (result) => result.isFulfilled()
             .map (result) => result.value()
-          unlinked = _(rows).map("id").reject(linked).value()
+          unlinked = _(rows).map("id").difference(linked).value()
+
+          @user.lastSync = { date: Date.now() }
+          @user.save()
 
           { linked, unlinked }
-
-    @user.lastSync = { date: Date.now() }
-    @user.save() ; @getAjustes()
 
   syncRow: (row) =>
     @productecaApi.getSalesOrder(row.id).then (salesOrder) =>

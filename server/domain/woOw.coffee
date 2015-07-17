@@ -34,7 +34,7 @@ class WoOw
   syncRow: (row) =>
     @productecaApi.getSalesOrder(row.id).then (salesOrder) =>
       updateNotes = @productecaApi.updateSalesOrder row.id,
-        notes: "Id woOw: #{row.idwoOw}"
+        notes: "#{row.idwoOw}"
 
       alreadyPaid = _.sum salesOrder.payments, "amount"
       pendingPayment = salesOrder.amount - alreadyPaid

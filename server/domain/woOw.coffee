@@ -33,20 +33,20 @@ class WoOw
 
   syncRow: (row) =>
     @productecaApi.getSalesOrder(row.id).then (salesOrder) =>
-      updateNotes = @productecaApi.updateSalesOrder row.id,
-        notes: "#{row.idwoOw}"
+      updateNotes = =>
+        @productecaApi.updateSalesOrder row.id, notes: "#{row.idwoOw}"
 
-      alreadyPaid = _.sum salesOrder.payments, "amount"
-      pendingPayment = salesOrder.amount - alreadyPaid
+      doPayment = =>
+        alreadyPaid = _.sum salesOrder.payments, "amount"
+        pendingPayment = salesOrder.amount - alreadyPaid
 
-      doPayment =
         if row.pagado and pendingPayment > 0
           @_doRequest "post", "/salesorders/#{row.id}/payments",
             amount: pendingPayment
             method: "Cash"
         else Promise.resolve()
 
-      doShipment =
+      doShipment = =>
         if row.entregado and _.isEmpty(salesOrder.shipments)
           @_doRequest "post", "/salesorders/#{row.id}/shipments",
             method: status: "Done"
@@ -55,11 +55,11 @@ class WoOw
               variation: line.variation.id
         else Promise.resolve()
 
-      updateNotes.then =>
+      updateNotes().then =>
         console.log "Order #{row.id}: notes ok"
-        doPayment.then =>
+        doPayment().then =>
           console.log "Order #{row.id}: payment ok"
-          doShipment.then =>
+          doShipment().then =>
             console.log "Order #{row.id}: shipment ok"
             row.id
 

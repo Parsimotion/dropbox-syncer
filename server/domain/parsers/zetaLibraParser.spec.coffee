@@ -1,4 +1,5 @@
 ZetaLibraParser = require("./zetaLibraParser")
+_ = require("lodash")
 
 describe "ZetaLibra Parser", ->
   parser = null
@@ -18,7 +19,9 @@ describe "ZetaLibra Parser", ->
         { CodigoArticulo: "RVERDES", PrecioConIVA: "900.00000"}
       ]
 
-    parser.getAjustes(data).should.eql [
+    ajustes = _.map parser.getAjustes(data), _.partialRight(_.pick, ['identifier', 'name', 'price', 'stock'])
+
+    ajustes.should.eql [
       { identifier: "RVERDES", price: 900, stock: 8 }
       { identifier: "UYR", price: 0.25925, stock: 299998140 }
     ]

@@ -1,4 +1,5 @@
 FixedLengthParser = require("./fixedLengthParser")
+_ = require("lodash")
 
 describe "Fixed length parser", ->
   parser = null
@@ -11,7 +12,7 @@ describe "Fixed length parser", ->
 924065117102                  ALR 111 50W 12V 24G                                        124.49     14.00
 """
 
-    ajuste = parser.getAjustes(data)[0]
+    ajuste = _.pick parser.getAjustes(data)[0], ['identifier', 'name', 'price', 'stock']
 
     ajuste.should.eql
       identifier: "924065117102"

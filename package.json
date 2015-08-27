@@ -27,7 +27,7 @@
     "passport": "~0.2.0",
     "passport-dropbox-oauth2": "^0.1.6",
     "passport-producteca": "^0.0.6",
-    "producteca-sdk": "0.0.18",
+    "producteca-sdk": "^0.0.25",
     "request": "^2.58.0",
     "serve-favicon": "~2.0.1",
     "soap": "^0.9.1",

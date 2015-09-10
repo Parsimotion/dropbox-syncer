@@ -29,6 +29,7 @@ UserSchema = new Schema
     warehouse: String
     priceList: String
     identifier: String
+    createProducts: Boolean
     synchro:
       prices: Boolean
       stocks: Boolean

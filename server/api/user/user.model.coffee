@@ -32,6 +32,7 @@ UserSchema = new Schema
     synchro:
       prices: Boolean
       stocks: Boolean
+      data: Boolean
 
   syncer:
     name:

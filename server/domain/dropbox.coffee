@@ -11,7 +11,7 @@ class Dropbox extends DataSource
 
   getAjustes: =>
     @dropboxClient
-    .readFileAsync @settings.fileName, binary: true
+    .readFileAsync @settings.fileName, binary: @settings.binary ? true
     .then (data) =>
       fecha: Date.parse data[1]._json.modified
       ajustes: @_parse data[0]

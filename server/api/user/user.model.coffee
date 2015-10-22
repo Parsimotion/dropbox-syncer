@@ -43,12 +43,8 @@ UserSchema = new Schema
 
   lastSync:
     date: Date
-
-  history: [
-    date: Date
     linked: Number
     unlinked: Number
-  ]
 
 ###*
 Methods

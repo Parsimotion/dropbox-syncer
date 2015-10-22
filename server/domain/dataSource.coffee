@@ -23,8 +23,7 @@ class DataSource
             .execute resultado.ajustes
       .then (lastSync) =>
         lastSync.date = Date.now()
-        @user.lastSync = _.pick lastSync, "date"
-        @user.history.push _.mapValues lastSync, (items) =>
+        @user.lastSync = _.mapValues lastSync, (items) =>
           if _.isArray items then items.length
           else items
         @user.save()

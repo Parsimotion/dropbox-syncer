@@ -5,9 +5,6 @@ angular.module 'dropbox-syncer-app'
   $scope.menu = [
     title: 'Inicio'
     link: '/'
-  ,
-    title: 'Historial'
-    link: '/history'
   ]
   $scope.isCollapsed = true
   $scope.getCurrentUser = Auth.getCurrentUser

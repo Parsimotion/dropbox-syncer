@@ -10,13 +10,11 @@ app.controller 'MainCtrl', ($scope, $http, $window, Adjustment, Settings, Auth) 
   $scope.getCurrentUser = Auth.getCurrentUser
 
   $scope.getCurrentUser().$promise.then (user) ->
-    $scope.lastSync = _(user.history)
-      .map (synchronization) =>
-        _.assign _.clone(synchronization),
-          linked: [1 .. synchronization.linked ]
-          unlinked: [ 1 .. synchronization.unlinked ]
-      .sortBy("date")
-      .last()
+    if not user.lastSync? then return
+    $scope.lastSync = _.assign(user.lastSync, {
+      linked: [1 .. user.lastSync.linked ]
+      unlinked: [ 1 .. user.lastSync.unlinked ]
+    })
 
   $scope.sincronizar = ->
     $scope.isSincronizando = true

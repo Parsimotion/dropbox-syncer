@@ -30,7 +30,7 @@
     "producteca-sdk": "0.0.45",
     "request": "^2.58.0",
     "serve-favicon": "~2.0.1",
-    "soap": "^0.9.1",
+    "soap": "^0.22.0",
     "xlsjs": "^0.7.5"
   },
   "devDependencies": {
